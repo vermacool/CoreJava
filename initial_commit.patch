@@ -1,0 +1,2371 @@
+Index: src/com/sked/basics/MatrixAddition.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/basics/MatrixAddition.java	(revision )
++++ src/com/sked/basics/MatrixAddition.java	(revision )
+@@ -0,0 +1,43 @@
++package com.sked.basics;
++
++import java.util.Scanner;
++
++/**
++ * Created by Android on 8/2/2017.
++ */
++public class MatrixAddition {
++    public static void main(String[] args) {
++        Scanner s = new Scanner(System.in);
++        System.out.print("Enter number of rows: ");
++        int rows = s.nextInt();
++        System.out.print("Enter number of columns: ");
++        int columns = s.nextInt();
++        int[][] a = new int[rows][columns];
++        int[][] b = new int[rows][columns];
++        System.out.println("Enter the first matrix");
++        for (int i = 0; i < rows; i++) {
++            for (int j = 0; j < columns; j++) {
++                a[i][j] = s.nextInt();
++            }
++        }
++        System.out.println("Enter the second matrix");
++        for (int i = 0; i < rows; i++) {
++            for (int j = 0; j < columns; j++) {
++                b[i][j] = s.nextInt();
++            }
++        }
++        int[][] c = new int[rows][columns];
++        for (int i = 0; i < rows; i++) {
++            for (int j = 0; j < columns; j++) {
++                c[i][j] = a[i][j] + b[i][j];
++            }
++        }
++        System.out.println("The sum of the two matrices is");
++        for (int i = 0; i < rows; i++) {
++            for (int j = 0; j < columns; j++) {
++                System.out.print(c[i][j] + " ");
++            }
++            System.out.println();
++        }
++    }
++}
+Index: src/com/sked/generics/GenericMethods.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/generics/GenericMethods.java	(revision )
++++ src/com/sked/generics/GenericMethods.java	(revision )
+@@ -0,0 +1,25 @@
++package com.sked.generics;
++
++/**
++ * Created by Android on 6/12/2017.
++ */
++public class GenericMethods {
++
++    //generic methods
++    public static <T> boolean isEqual(GenericClass<T> g1,GenericClass<T> g2){
++        return g1.getObject().equals(g2.getObject());
++    }
++
++    public static void main(String[] args) {
++        GenericClass<String> g1=new GenericClass<>();
++        g1.setObject("Manish");
++        GenericClass<String> g2=new GenericClass<>();
++        g2.setObject("Manish");
++
++        boolean isEqual=GenericMethods.isEqual(g1,g2);
++
++        System.out.println(isEqual);
++
++
++    }
++}
+Index: src/com/sked/string/CompareStringBuffer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/string/CompareStringBuffer.java	(revision )
++++ src/com/sked/string/CompareStringBuffer.java	(revision )
+@@ -0,0 +1,30 @@
++package com.sked.string;
++
++/**
++ * Created by Android on 11/7/2017.
++ */
++public class CompareStringBuffer {
++    public static void main(String[] args) {
++        String str= "I am Human";
++        StringBuffer stringBuffer=new StringBuffer("I am Human");
++
++        /**
++         * we can use contentEquals() method to compare content with a string buffer.
++         * it return boolean value.
++         */
++
++        if(str.contentEquals(stringBuffer)){
++            System.out.println("equals");
++        }else {
++            System.out.println("unequals");
++        }
++
++        StringBuffer sbDiff=new StringBuffer("i am super human");
++
++        if(str.contentEquals(sbDiff)){
++            System.out.println("equals sbDiff");
++        }else {
++            System.out.println("unequals sbDiff");
++        }
++    }
++}
+Index: src/com/sked/Stack/StackOperation.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/Stack/StackOperation.java	(revision )
++++ src/com/sked/Stack/StackOperation.java	(revision )
+@@ -0,0 +1,99 @@
++package com.sked.Stack;
++
++/**
++ * Created by Android on 8/9/2017.
++ */
++public class StackOperation {
++    private int stackSize;
++    private int[] stackArr;
++    private int top;
++
++    public StackOperation(int size) {
++        this.stackSize = size;
++        this.stackArr = new int[size];
++        this.top = -1;
++    }
++
++    /**
++     * this method adds an entry at the top
++     *
++     * @param entry
++     * @throws Exception
++     */
++    public void push(int entry) throws Exception {
++        if (this.isStackFull()) {
++            throw new Exception("Stack is already full, Can't add element");
++        }
++        System.out.println("adding entry" + entry);
++        this.stackArr[top++] = entry;
++    }
++
++    /**
++     * this method will return the top element of the stack
++     *
++     * @return top
++     */
++    public int peek() {
++        return stackArr[top];
++    }
++
++    /**
++     * this method remove an entry from top of stack
++     *
++     * @return
++     * @throws Exception
++     */
++    public int pop() throws Exception {
++        if (this.isStackEmpty()) {
++            throw new Exception("stack is empty,can't delete element");
++        }
++        int entry = this.stackArr[top--];
++        System.out.println("removing elements from stack" + entry);
++        return entry;
++    }
++
++    public boolean isStackFull() {
++        return (top == stackSize - 1);
++    }
++
++    public boolean isStackEmpty() {
++        return (top == -1);
++    }
++
++    public static void main(String[] args) {
++        StackOperation obj = new StackOperation(10);
++        try {
++            obj.push(2);
++            obj.push(56);
++            obj.push(4);
++            obj.push(5);
++            obj.push(6);
++            obj.push(14);
++            obj.push(41);
++            obj.push(90);
++            obj.push(49);
++            obj.push(23);
++            obj.push(65);
++            obj.pop();
++        } catch (Exception e) {
++            System.out.println(e.getMessage());
++        }
++
++        try {
++            obj.pop();
++            obj.pop();
++            obj.pop();
++            obj.pop();
++            obj.pop();
++            obj.pop();
++            obj.pop();
++            obj.pop();
++            obj.pop();
++            obj.pop();
++            obj.pop();
++        }catch (Exception e){
++            System.out.println(e.getMessage());
++        }
++
++    }
++}
+Index: src/com/sked/basics/SingletonClass.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/basics/SingletonClass.java	(revision )
++++ src/com/sked/basics/SingletonClass.java	(revision )
+@@ -0,0 +1,25 @@
++package com.sked.basics;
++
++/**
++ * Created by Android on 8/9/2017.
++ */
++public class SingletonClass {
++    private static SingletonClass mObj;
++
++    static {
++        mObj = new SingletonClass();
++    }
++
++    private static SingletonClass getInstance() {
++        return mObj;
++    }
++
++    private void testMe() {
++        System.out.println("hey its working");
++    }
++
++    public static void main(String[] args) {
++        SingletonClass mObject=getInstance();
++        mObject.testMe();
++    }
++}
+Index: src/com/sked/DemoAbstract.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/DemoAbstract.java	(revision )
++++ src/com/sked/DemoAbstract.java	(revision )
+@@ -0,0 +1,14 @@
++package com.sked;
++
++/**
++ * Created by Android on 7/15/2017.
++ */
++public abstract class DemoAbstract {
++    int x, y;
++
++    void moveTo(int x, int y) {
++        System.out.println("move to coordinate from 0,0 to %d%d :"+ x+","+y);
++    }
++    abstract void draw();
++    abstract void resize();
++}
+Index: src/com/sked/algorithm/LinearSearchAlgo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/algorithm/LinearSearchAlgo.java	(revision )
++++ src/com/sked/algorithm/LinearSearchAlgo.java	(revision )
+@@ -0,0 +1,21 @@
++package com.sked.algorithm;
++
++/**
++ * Created by Android on 11/11/2017.
++ */
++public class LinearSearchAlgo {
++    public static void main(String[] args) {
++        int[] arr = {12, 34, 1, 14, 3, 4, 43, 23, 23, 56};
++        System.out.println("Key "+23+" Found at index "+findItemIndex(arr, 23));
++    }
++
++    private static int findItemIndex(int[] arr, int i) {
++        //issue with
++        for (int index = 0; index < arr.length; index++) {
++            if (arr[index] == i) {
++                return index;
++            }
++        }
++        return -1;
++    }
++}
+Index: src/com/sked/basics/PrimeNumber.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/basics/PrimeNumber.java	(revision )
++++ src/com/sked/basics/PrimeNumber.java	(revision )
+@@ -0,0 +1,19 @@
++package com.sked.basics;
++
++/**
++ * Created by Android on 10/5/2017.
++ */
++public class PrimeNumber {
++    public static void main(String[] args) {
++        System.out.print("is number is prime " + new PrimeNumber().isPrimeNumber(23));
++    }
++
++    public   boolean isPrimeNumber(int number) {
++        for (int i = 2; i <= number/ 2; i++) {
++            if (number % i == 0) {
++                return false;
++            }
++        }
++        return true;
++    }
++}
+Index: src/com/sked/Stack/MyGenericStack.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/Stack/MyGenericStack.java	(revision )
++++ src/com/sked/Stack/MyGenericStack.java	(revision )
+@@ -0,0 +1,82 @@
++package com.sked.Stack;
++
++/**
++ * Created by Android on 8/17/2017.
++ */
++public class MyGenericStack<T extends Object> {
++    private T[] stackArray;
++    private int stackSize;
++    private int top;
++
++    public MyGenericStack(int stackSize) {
++        this.stackSize = stackSize;
++        this.stackArray = (T[]) new Object[stackSize];
++        this.top = -1;
++    }
++
++    public static void main(String[] args) {
++        MyGenericStack<String> mObject = new MyGenericStack<>(4);
++       try {
++           mObject.push("first entry");
++           mObject.push("second entry");
++           mObject.push("third entry");
++           mObject.push("four entry");
++           mObject.push("fifth entry");
++           mObject.pop();
++           mObject.pop();
++       }catch (Exception e){
++           System.out.println(e.getMessage());
++       }
++       MyGenericStack<Integer> mObjectInt=new MyGenericStack<>(2);
++       try {
++           mObjectInt.push(1);
++           mObjectInt.push(6);
++           mObjectInt.push(3);
++           mObjectInt.push(1);
++           mObjectInt.push(1);
++       }catch (Exception e){
++           System.out.println(e.getMessage());
++       }
++
++    }
++
++    private void push(T entry) {
++        if (this.isStackFull()) {
++            System.out.println("stack is full incresing the size");
++            this.increaseStackSize();
++        }
++        System.out.println("adding to stack: "+entry);
++        this.stackArray[++top] = entry;
++    }
++
++    private T pop() throws Exception {
++        if (this.isStackEmpty()) {
++            throw new Exception("stack is empty,can't remove elements");
++        }
++        T entry = this.stackArray[top--];
++        System.out.println("removing the element" + entry);
++        return entry;
++    }
++
++    private void increaseStackSize() {
++        T[] mNewStack = (T[]) new Object[this.stackSize * 2];
++        for (int i = 0; i < stackSize; i++) {
++            mNewStack[i] = this.stackArray[i];
++        }
++        this.stackArray = mNewStack;
++        this.stackSize = this.stackSize * 2;
++    }
++
++    /**
++     * check whether stack is empty
++     *
++     * @return boolean
++     */
++    private boolean isStackEmpty() {
++        return (top == -1);
++    }
++
++    private boolean isStackFull() {
++        return (top == stackSize - 1);
++    }
++}
+Index: src/com/sked/string/StringReplacement.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/string/StringReplacement.java	(revision )
++++ src/com/sked/string/StringReplacement.java	(revision )
+@@ -0,0 +1,23 @@
++package com.sked.string;
++
++import java.util.StringTokenizer;
++
++/**
++ * Created by Android on 11/9/2017.
++ */
++public class StringReplacement {
++    public static void main(String[] args) {
++        String str = "This     is       an      example  string";
++      // System.out.println("replace 's' with  'z' : "+str.replace('s','z'));
++
++      // String result= str.substring(11,18);
++      // System.out.println(str.replace(result,"excellent").toLowerCase().trim());
++
++        StringTokenizer stringTokenizer=new StringTokenizer(str," ");
++        StringBuffer sb=new StringBuffer();
++        while (stringTokenizer.hasMoreElements()){
++            sb.append(stringTokenizer.nextElement()).append(" ");
++        }
++        System.out.println(sb.toString().trim());
++    }
++}
+Index: .idea/uiDesigner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/uiDesigner.xml	(revision )
++++ .idea/uiDesigner.xml	(revision )
+@@ -0,0 +1,124 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Palette2">
++    <group name="Swing">
++      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++      </item>
++      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.png" removable="false" auto-create-binding="false" can-attach-label="true">
++        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++        <initial-values>
++          <property name="text" value="Button" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="RadioButton" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="CheckBox" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="Label" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++          <preferred-size width="-1" height="20" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++      </item>
++    </group>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/com/sked/Stack/DelimiterMatching.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/Stack/DelimiterMatching.java	(revision )
++++ src/com/sked/Stack/DelimiterMatching.java	(revision )
+@@ -0,0 +1,103 @@
++package com.sked.Stack;
++
++/**
++ * Created by Android on 8/21/2017.
++ */
++public class DelimiterMatching {
++    public static void main(String[] args) {
++        DelimiterMatching obj = new DelimiterMatching();
++     /*   String expression = "{(a+b)*(c+d)}";
++        boolean result = obj.isDelimiterMatching(expression);
++        System.out.println(expression + "  :  " + result);*/
++
++        String expressionSecond = "{(a+b)+[x*(c+d)}}";
++        boolean result = obj.isDelimiterMatching(expressionSecond);
++        System.out.println(expressionSecond + " : " + result);
++    }
++
++    private boolean isDelimiterMatching(String input) {
++        int stackSize = input.length();
++        StackImpl<Character> stackObj = new StackImpl<>(stackSize);
++        for (int i = 0; i < stackSize; i++) {
++            char ch = input.charAt(i);
++            switch (ch) {
++                case '(':
++                case '{':
++                case '[':
++                    try {
++                        stackObj.push(ch);
++                    } catch (Exception e) {
++                        break;
++                    }
++                    break;
++                case ')':
++                case '}':
++                case ']':
++                    if (!stackObj.isStackEmpty()) {
++                        try {
++                            char outChat = stackObj.pop();
++                            if ((ch == ')' && outChat != '(') || (ch == '}' && outChat != '{') || (ch == ']' && outChat != '[')) {
++                                System.out.println("mismatch found: " + ch + "at" + i);
++                                return false;
++                            }
++                        } catch (Exception e) {
++                            break;
++                        }
++
++                    } else {
++                        System.out.println("mismatch found :" + ch + "at - " + i);
++                        return false;
++                    }
++                    break;
++                default:
++                    break;
++            }
++
++        }
++        if (!stackObj.isStackEmpty()) {
++            System.out.println("Error: missing right delimiter");
++            return false;
++        }
++        return true;
++    }
++
++    class StackImpl<T extends Object> {
++        private int top;
++        private T[] stackArray;
++        private int stackSize;
++
++
++        public StackImpl(int size) {
++            this.stackSize = size;
++            this.stackArray = (T[]) new Object[size];
++            this.top = -1;
++        }
++
++        private void push(T entry) throws Exception {
++            if (isStackFull()) {
++                throw new Exception("Stack is full");
++            }
++            this.stackArray[++top] = entry;
++        }
++
++        private T pop() throws Exception {
++            if (isStackEmpty()) {
++                throw new Exception("stack is empty");
++            }
++            T entry = this.stackArray[top--];
++            return entry;
++        }
++
++        private T peep() {
++            return stackArray[top];
++        }
++
++        public boolean isStackEmpty() {
++            return (top == -1);
++        }
++
++        public boolean isStackFull() {
++            return (top == stackSize - 1);
++        }
++    }
++}
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(revision )
++++ .idea/vcs.xml	(revision )
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/com/sked/collection/VectorOperation.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/collection/VectorOperation.java	(revision )
++++ src/com/sked/collection/VectorOperation.java	(revision )
+@@ -0,0 +1,29 @@
++package com.sked.collection;
++
++import java.util.Vector;
++
++/**
++ * Created by Android on 11/11/2017.
++ */
++public class VectorOperation {
++    public static void main(String[] args) {
++        Vector<String> vct=new Vector<>();
++        //adding element to end
++        vct.add("first");
++        vct.add("second");
++        vct.add("third");
++        System.out.println(vct);
++        //adding element to specified position
++        vct.add(2,"random");
++        System.out.println(vct);
++
++        //getting elements by index
++        System.out.println("Element at index 3 is: "+vct.get(3));
++        //getting first element
++        System.out.println("First element of vector is:  "+vct.firstElement());
++        //getting last element
++        System.out.println("Last element of vector is: "+vct.lastElement());
++        //check whether string is empty or not
++        System.out.println("Check whether vector is empty or not: "+vct.isEmpty());
++    }
++}
+Index: src/com/sked/string/RemoveNonAsciiChar.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/string/RemoveNonAsciiChar.java	(revision )
++++ src/com/sked/string/RemoveNonAsciiChar.java	(revision )
+@@ -0,0 +1,32 @@
++package com.sked.string;
++
++/**
++ * Created by Android on 11/10/2017.
++ */
++public class RemoveNonAsciiChar {
++    public static void main(String[] args) {
++        String str = "Bj��rk����oacute�";
++        System.out.println(str);
++        System.out.println();
++        str = str.replaceAll("[^\\p{ASCII}]", "");
++        System.out.println(str);
++        /**
++         * Removing Html character from string .
++         */
++        String stringHtm = "<B>Text in bold face</B>";
++        System.out.println(stringHtm);
++        stringHtm = stringHtm.replaceAll("\\<.*?\\>", "");
++        System.out.println(stringHtm);
++        /**
++         * Get the line count from the string.
++         */
++        String formattedString= "Learning never exhaust mind.\nAll that we see or seem is but a dream within a dream.\nBe extremely honest with oneself is a good exercise.";
++        System.out.println(formattedString);
++        System.out.println("ine count: "+getLineCount(formattedString));
++    }
++
++    private static int getLineCount(String str){
++        return str.split("[\n|\r]").length;
++    }
++
++}
+Index: .idea/description.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/description.html	(revision )
++++ .idea/description.html	(revision )
+@@ -0,0 +1,1 @@
++<html>Simple <b>Java</b> application that includes a class with <code>main()</code> method</html>
+\ No newline at end of file
+Index: src/com/sked/Autoboxing.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/Autoboxing.java	(revision )
++++ src/com/sked/Autoboxing.java	(revision )
+@@ -0,0 +1,25 @@
++package com.sked;
++
++/**
++ * Created by Android on 6/12/2017.
++ */
++public class Autoboxing {
++
++    static void m(Integer s1, Integer s2) {
++        System.out.printf("int int %d %d", s1, s2);
++    }
++
++    static void m(Integer... i) {
++        for (Integer integer :
++                i) {
++            System.out.printf("integer..." + integer);
++            System.out.println();
++        }
++
++    }
++
++    public static void main(String[] args) {
++        int s1 = 20, s2 = 30,s3=30;
++        m(s1, s2,s3);
++    }
++}
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules.xml	(revision )
++++ .idea/modules.xml	(revision )
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/Core java.iml" filepath="$PROJECT_DIR$/Core java.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/com/sked/string/MyArrayCopy.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/string/MyArrayCopy.java	(revision )
++++ src/com/sked/string/MyArrayCopy.java	(revision )
+@@ -0,0 +1,25 @@
++package com.sked.string;
++
++/**
++ * Created by Android on 11/7/2017.
++ */
++public class MyArrayCopy {
++    public static void main(String[] args) {
++        char ch[] = {'a', 'd', ' ', 'g', 'o', 'l', ' ', 'p'};
++
++        /**
++         * We can copy a char array to a string by using
++         * copyValueOf() method.
++         */
++        String chArray = String.copyValueOf(ch);
++        System.out.println(chArray);
++
++        /**
++         * We can copy a range of character in char array to a string by using
++         * copyValueOf() method.
++         */
++        String subStr=String.copyValueOf(ch,1,5);
++        System.out.println(subStr);
++
++    }
++}
+Index: src/com/sked/collection/MyCollectionIterator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/collection/MyCollectionIterator.java	(revision )
++++ src/com/sked/collection/MyCollectionIterator.java	(revision )
+@@ -0,0 +1,26 @@
++package com.sked.collection;
++
++import java.util.ArrayList;
++import java.util.Iterator;
++import java.util.List;
++
++/**
++ * Created by Android on 11/10/2017.
++ */
++public class MyCollectionIterator {
++    public static void main(String[] args) {
++        String removeElem="C++";
++
++        List<String> myList=new ArrayList<>();
++        myList.add("Java");
++        myList.add("Unix");
++        myList.add("Oracle");
++        myList.add("C++");
++        myList.add("Perl");
++        System.out.println("Before remove:"+myList);
++        System.out.println();
++        myList.removeIf(removeElem::equals);
++        System.out.println("After remove:"+myList);
++
++    }
++}
+Index: src/com/sked/adapterdesignpattern/FurnanceControllerAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/adapterdesignpattern/FurnanceControllerAdapter.java	(revision )
++++ src/com/sked/adapterdesignpattern/FurnanceControllerAdapter.java	(revision )
+@@ -0,0 +1,19 @@
++package com.sked.adapterdesignpattern;
++
++/**
++ * Created by Android on 8/12/2017.
++ * Adapter class, which converts temperature from centigrade format to fahrenheit format.
++ */
++
++public class FurnanceControllerAdapter extends FurnanceController {
++    /**
++     * This method access temperature in centigrade
++     *
++     * @param heatLevel
++     */
++    public void controllerTemperature(int heatLevel) {
++        //change temp from centigrade to fahrenheit
++        heatLevel = ((heatLevel - 32) * 5) / 9;
++        changeFurnaceTemperature(heatLevel);
++    }
++}
+Index: src/com/sked/generics/GenericWildCard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/generics/GenericWildCard.java	(revision )
++++ src/com/sked/generics/GenericWildCard.java	(revision )
+@@ -0,0 +1,30 @@
++package com.sked.generics;
++
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * Created by Android on 6/13/2017.
++ */
++public class GenericWildCard {
++
++
++    public static void main(String[] args) {
++
++        List<Integer> number = new ArrayList<>();
++        number.add(10);
++        number.add(20);
++        number.add(30);
++
++        double sumOfValues = sum(number);
++        System.out.printf("sum of values is %f", sumOfValues);
++    }
++
++    private static double sum(List<? extends Number> number) {
++        double sum = 0;
++        for (Number numValue : number) {
++            sum += numValue.doubleValue();
++        }
++        return sum;
++    }
++}
+Index: src/com/sked/basics/ReverseNumber.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/basics/ReverseNumber.java	(revision )
++++ src/com/sked/basics/ReverseNumber.java	(revision )
+@@ -0,0 +1,23 @@
++package com.sked.basics;
++
++import java.util.Scanner;
++
++/**
++ * Created by Android on 10/6/2017.
++ */
++public class ReverseNumber {
++    public static void main(String[] args) {
++        int number=1234;
++        //System.out.println("Plese enter the number");
++        /*Scanner sc = new Scanner(System.in);
++        number = sc.nextInt();*/
++        String str = number + "";
++        String[] arr=new String[str.length()-1];
++        for (int i = 0; i < str.length()-1; i++) {
++            arr = str.split("");
++        }
++        for (int j=str.length()-1;j>= 0;j--){
++            System.out.print(arr[j]);
++        }
++    }
++}
+Index: src/com/sked/keywords/native_keyword/Main.c
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/keywords/native_keyword/Main.c	(revision )
++++ src/com/sked/keywords/native_keyword/Main.c	(revision )
+@@ -0,0 +1,7 @@
++#include <jni.h>
++#include "Main.h"
++
++JNIEXPORT  jnit JNICALL Java_Main_intMethod(JNIEnv *env ,jobject obj , jint i){
++
++return i*i
++}
+\ No newline at end of file
+Index: src/com/sked/Exception/FinallyBlock.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/Exception/FinallyBlock.java	(revision )
++++ src/com/sked/Exception/FinallyBlock.java	(revision )
+@@ -0,0 +1,36 @@
++package com.sked.Exception;
++
++/**
++ * Created by Android on 8/22/2017.
++ */
++
++public class FinallyBlock {
++    /**
++     * The runtime system always execute the code within finally block regardless of what happened in try block.
++     * so its a good place to keep clean up code.
++     * @param args
++     */
++    public static void main(String[] args) {
++        /**
++         * Exception will occur here ,after catch block control will goto finally block
++         */
++        try {
++            int i = 10 / 0;
++        } catch (Exception e) {
++            System.out.println(e.getMessage());
++        } finally {
++            System.out.println("Numeric overflow in the expression : ");
++        }
++        /**
++         * In this case exception won't .After executing try block control will go to finally block.
++         */
++
++        try{
++            int i=10/10;
++        }catch (Exception e){
++            System.out.println(e.getMessage());
++        }finally {
++            System.out.println("code has reached 2nd finally block");
++        }
++    }
++}
+Index: src/com/sked/keywords/native_keyword/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/keywords/native_keyword/Main.java	(revision )
++++ src/com/sked/keywords/native_keyword/Main.java	(revision )
+@@ -0,0 +1,13 @@
++package com.sked.keywords.native_keyword;
++
++/**
++ * Created by Android on 10/14/2017.
++ */
++public class Main {
++    public native int square(int num);
++
++    public static void main(String[] args) {
++        System.loadLibrary("Main.c");
++        System.out.println(new Main().square(2));
++    }
++}
+Index: src/com/sked/basics/DeleteString.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/basics/DeleteString.java	(revision )
++++ src/com/sked/basics/DeleteString.java	(revision )
+@@ -0,0 +1,21 @@
++package com.sked.basics;
++
++/**
++ * Created by Android on 10/28/2017.
++ */
++public class DeleteString {
++    public static void main(String[] args) {
++        String str = "1,2,3,4";
++        String subStr1 = str.substring(3, 5);
++        System.out.println("Sub-string is "+subStr1);
++
++        str = str.replace(subStr1, "");
++        System.out.println(str);
++        //String[] strings = str.split(",");
++
++       /* for (String strObj : strings) {
++            System.out.print(strObj);
++        }*/
++
++    }
++}
+Index: src/com/sked/string/MyStringIndexOf.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/string/MyStringIndexOf.java	(revision )
++++ src/com/sked/string/MyStringIndexOf.java	(revision )
+@@ -0,0 +1,47 @@
++package com.sked.string;
++
++/**
++ * Created by Android on 11/7/2017.
++ */
++public class MyStringIndexOf {
++    public static void main(String[] args) {
++        String str = "use this string for testing this";
++
++        System.out.println("Char 's' at first occurance: " + str.indexOf('s'));
++
++        System.out.println("String \"this\" at first occurrence: " + str.indexOf("this"));
++        System.out.println();
++
++        /**
++         * Returns the first occurance from specified start index
++         */
++        System.out.println("First occurrence of chat 's' after 4th index onward: " + str.indexOf('s', 4));
++        System.out.println("First occurance of String \"this\" from 5th index onwards: " + str.indexOf("this", 5));
++        System.out.println();
++        /**
++         *  Q: How to find a string start with another string value in java?
++         *  A: By using startsWith() method, you can get whether the string starts with the given string or not.
++         *     Also this method tells that the string occurence at a specific position.
++         */
++        System.out.println("Is this string: " + str + " : start with \"this\"?  " + str.startsWith("this"));
++        System.out.println("Is this string: " + str + " : start with \"string\"? after 9th character? " + str.startsWith("string", 9));
++
++        System.out.println();
++        /**
++         *  By using lastIndexOf() method you can get last occurence of the the reference string or character.
++         *  Also lastIndexOf() method gives last occurence based on a specific position.
++         */
++        System.out.println();
++        //System.out.println(str+" : last occurrence of this: "+str.lastIndexOf("this"));
++        //System.out.println(str+" : last occurrence of \"this\" from 24th position backward is : "+str.lastIndexOf("this",24));
++
++        System.out.println(str + " : last occurrence of  character  's' from 2nd index backward:- " + str.lastIndexOf('s', 1));
++        System.out.println();
++
++        if (str.endsWith("this")){
++            System.out.println(str + ": ends with \"this\" " );}
++            else {
++            System.out.println(str + ": don't ends with \"this\" " );
++        }
++    }
++}
+Index: src/com/sked/Stack/ReverseString.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/Stack/ReverseString.java	(revision )
++++ src/com/sked/Stack/ReverseString.java	(revision )
+@@ -0,0 +1,80 @@
++package com.sked.Stack;
++
++import com.sun.istack.internal.NotNull;
++
++import java.util.Scanner;
++
++/**
++ * Created by Android on 8/17/2017.
++ */
++public class ReverseString {
++
++    public String reverseString(@NotNull String word) {
++        StringBuilder builder = new StringBuilder();
++        int length = word.length();
++        ReverseStringMain<Character> stackObj = new ReverseStringMain<>(length);
++        for (int i = 0; i < length; i++) {
++            try {
++                stackObj.push(word.charAt(i));
++            } catch (Exception e) {
++                e.printStackTrace();
++            }
++        }
++        while (true) {
++            try {
++                builder.append(stackObj.pop());
++            } catch (Exception e) {
++                break;
++                /*e.printStackTrace();*/
++            }
++        }
++        return builder.toString();
++    }
++
++    public static void main(String[] args) {
++        ReverseString reverseString=new ReverseString();
++        System.out.println("enter your word to reverse: ");
++        Scanner sc=new Scanner(System.in);
++        String word=sc.nextLine();
++        System.out.println("your reverse word is: "+reverseString.reverseString(word));
++    }
++
++    class ReverseStringMain<T extends Object> {
++        private int stackSize;
++        private T[] stackArray;
++        private int top;
++
++        private ReverseStringMain(int entry) {
++            this.stackSize = entry;
++            this.stackArray = (T[]) new Object[entry];
++            this.top = -1;
++        }
++
++        private void push(T entry) throws Exception {
++            if (isStackFull()) {
++                throw new Exception("stack is full,can't push element");
++            }
++            this.stackArray[++top] = entry;
++
++        }
++
++        private T pop() throws Exception {
++            if (isStackEmpty()) {
++                throw new Exception("stack is empty");
++
++            }
++            T entry = this.stackArray[top--];
++
++            return entry;
++        }
++
++        private boolean isStackEmpty() {
++            return (top == -1);
++        }
++
++        private boolean isStackFull() {
++            return (top == stackSize - 1);
++        }
++
++    }
++}
+Index: .idea/project-template.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/project-template.xml	(revision )
++++ .idea/project-template.xml	(revision )
+@@ -0,0 +1,3 @@
++<template>
++  <input-field default="com.company">IJ_BASE_PACKAGE</input-field>
++</template>
+\ No newline at end of file
+Index: src/com/sked/string/MyStringByte.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/string/MyStringByte.java	(revision )
++++ src/com/sked/string/MyStringByte.java	(revision )
+@@ -0,0 +1,14 @@
++package com.sked.string;
++
++/**
++ * Created by Android on 11/7/2017.
++ */
++public class MyStringByte {
++    public static void main(String[] args) {
++        String str="hey...Welcome to world of human";
++        byte[] byteArray=str.getBytes();
++
++        System.out.println("String array length: "+str.length());
++        System.out.println("byte array length: "+byteArray.length);
++    }
++}
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision )
++++ .idea/misc.xml	(revision )
+@@ -0,0 +1,50 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ClientPropertiesManager">
++    <properties class="javax.swing.AbstractButton">
++      <property name="hideActionText" class="java.lang.Boolean" />
++    </properties>
++    <properties class="javax.swing.JComponent">
++      <property name="html.disable" class="java.lang.Boolean" />
++    </properties>
++    <properties class="javax.swing.JEditorPane">
++      <property name="JEditorPane.w3cLengthUnits" class="java.lang.Boolean" />
++      <property name="JEditorPane.honorDisplayProperties" class="java.lang.Boolean" />
++      <property name="charset" class="java.lang.String" />
++    </properties>
++    <properties class="javax.swing.JList">
++      <property name="List.isFileList" class="java.lang.Boolean" />
++    </properties>
++    <properties class="javax.swing.JPasswordField">
++      <property name="JPasswordField.cutCopyAllowed" class="java.lang.Boolean" />
++    </properties>
++    <properties class="javax.swing.JSlider">
++      <property name="Slider.paintThumbArrowShape" class="java.lang.Boolean" />
++      <property name="JSlider.isFilled" class="java.lang.Boolean" />
++    </properties>
++    <properties class="javax.swing.JTable">
++      <property name="Table.isFileList" class="java.lang.Boolean" />
++      <property name="JTable.autoStartsEdit" class="java.lang.Boolean" />
++      <property name="terminateEditOnFocusLost" class="java.lang.Boolean" />
++    </properties>
++    <properties class="javax.swing.JToolBar">
++      <property name="JToolBar.isRollover" class="java.lang.Boolean" />
++    </properties>
++    <properties class="javax.swing.JTree">
++      <property name="JTree.lineStyle" class="java.lang.String" />
++    </properties>
++    <properties class="javax.swing.text.JTextComponent">
++      <property name="caretAspectRatio" class="java.lang.Double" />
++      <property name="caretWidth" class="java.lang.Integer" />
++    </properties>
++  </component>
++  <component name="EntryPointsManager">
++    <entry_points version="2.0" />
++  </component>
++  <component name="ProjectKey">
++    <option name="state" value="project://e2804f05-5315-4fc6-a121-c522a6c26470" />
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/com/sked/generics/LoweboundedWildcard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/generics/LoweboundedWildcard.java	(revision )
++++ src/com/sked/generics/LoweboundedWildcard.java	(revision )
+@@ -0,0 +1,26 @@
++package com.sked.generics;
++
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * Created by Android on 6/13/2017.
++ */
++public class LoweboundedWildcard {
++    public static void main(String[] args) {
++        List<Integer> ints = new ArrayList<>();
++
++
++        Double sum = Sum(ints);
++    }
++
++    private static Double Sum(List<? super Integer> ints) {
++        double sum = 0;
++        ints.add(new Integer(80));
++        return sum;
++
++    }
++
++
++}
++
+Index: src/com/sked/generics/UnboundWildcard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/generics/UnboundWildcard.java	(revision )
++++ src/com/sked/generics/UnboundWildcard.java	(revision )
+@@ -0,0 +1,24 @@
++package com.sked.generics;
++
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * Created by Android on 6/13/2017.
++ */
++public class UnboundWildcard {
++
++    public static void main(String[] args) {
++        List<Integer> ints = new ArrayList<>();
++        ints.add(7);
++        ints.add(8);
++        ints.add(9);
++        sumOfValues(ints);
++    }
++
++    private static void sumOfValues(List<?> ints) {
++        for (Object obj : ints) {
++            System.out.println(obj);
++        }
++    }
++}
+Index: Core java.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Core java.iml	(revision )
++++ Core java.iml	(revision )
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
++
+Index: src/com/sked/basics/Area.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/basics/Area.java	(revision )
++++ src/com/sked/basics/Area.java	(revision )
+@@ -0,0 +1,72 @@
++package com.sked.basics;
++
++import java.util.Scanner;
++
++/**
++ * Created by Android on 8/5/2017.
++ */
++public class Area {
++    private static double radius, area;
++    private static Shape shape;
++
++    public enum Shape {CIRCLE, RECTANGLE, TRIANGLE,HEXAGON}
++
++    public Area(Shape shape) {
++        Area.shape = shape;
++    }
++
++    private void doCalculation() {
++
++        switch (shape) {
++            case CIRCLE:
++                calculateAreaofCircle();
++                break;
++            case TRIANGLE:
++                break;
++            case RECTANGLE:
++                break;
++            default:
++                System.out.println("This shape is not defined");
++                break;
++        }
++    }
++
++    public static void main(String[] args) {
++
++        System.out.println("Enter the shape the shape to calculate");
++        Scanner checkCalculation = new Scanner(System.in);
++        if (checkCalculation.next().equalsIgnoreCase("circle")) {
++            Area area = new Area(Shape.CIRCLE);
++            area.doCalculation();
++        } else if (checkCalculation.next().equalsIgnoreCase("rectangle")) {
++            Area area = new Area(Shape.RECTANGLE);
++            area.doCalculation();
++        } else if (checkCalculation.next().equalsIgnoreCase("triangle")) {
++            Area area = new Area(Shape.TRIANGLE);
++            area.doCalculation();
++        } else {
++            Area area = new Area(Shape.HEXAGON);
++            area.doCalculation();
++
++        }
++
++
++    }
++
++    private static void calculateAreaofCircle() {
++        Scanner sc = new Scanner(System.in);
++
++        System.out.println("Enter radios of circle");
++
++        radius = sc.nextDouble();
++
++        //formula to calculate area of circle
++        area = Math.PI * radius * radius;
++        System.out.println("Area of circle is :- " + area);
++
++        //calculate perimeter of circle
++        double perimeter = 2 * Math.PI * radius * radius;
++        System.out.println("Perimeter of circle is :- " + perimeter);
++
++    }
++}
+Index: src/com/sked/generics/GenericClass.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/generics/GenericClass.java	(revision )
++++ src/com/sked/generics/GenericClass.java	(revision )
+@@ -0,0 +1,29 @@
++package com.sked.generics;
++
++/**
++ * Created by Android on 6/12/2017.
++ */
++public class GenericClass<O> {
++    private O object;
++
++    public O getObject() {
++        return object;
++    }
++
++    public void setObject(O object) {
++        this.object = object;
++    }
++
++    public static void main(String[] args) {
++
++
++        GenericClass<String> mainObj = new GenericClass<>();
++        mainObj.setObject("Manish");
++
++        String string2 = mainObj.getObject();
++        System.out.println(string2);
++
++    }
++
++
++}
+Index: src/com/sked/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/Main.java	(revision )
++++ src/com/sked/Main.java	(revision )
+@@ -0,0 +1,27 @@
++package com.sked;
++
++public class Main {
++
++
++    public static <T extends Comparable<T>> T maximum(T x, T y, T z) {
++        T max = x;
++        if (y.compareTo(max) > 0) {
++            max = y;
++        }
++        if (z.compareTo(max) > 0) {
++            max = z;
++        }
++        return max;
++    }
++
++
++    public static void main(String[] args) {
++
++        System.out.printf("greater among three number is %d %d %d %s  ", 4, 7, 9, ":-" + maximum(4, 7, 9));
++        System.out.println();
++        System.out.printf("greater among three string is %s %s %s %s  ", "Manish", "TGBR", "Duffer", ":-" + maximum("Manish", "TGBR", "Rashmi"));
++        System.out.println();
++
++
++    }
++}
+Index: src/com/sked/Stack/DynamicStack.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/Stack/DynamicStack.java	(revision )
++++ src/com/sked/Stack/DynamicStack.java	(revision )
+@@ -0,0 +1,80 @@
++package com.sked.Stack;
++
++/**
++ * Created by Android on 8/17/2017.
++ */
++
++public class DynamicStack {
++    private int[] stackArray;
++    private int top;
++    private int stackSize;
++
++    public DynamicStack(int stackSize) {
++        this.stackSize = stackSize;
++        this.stackArray = new int[stackSize];
++        this.top = -1;
++    }
++
++    public static void main(String[] args) {
++        DynamicStack obj = new DynamicStack(5);
++        try {
++            for (int i = 0; i < 11; i++) {
++                obj.push(i);
++            }
++        } catch (Exception e) {
++            System.out.println(e.getMessage());
++        }
++        for (int i = 0; i <= 6; i++) {
++            try {
++                obj.pop();
++            } catch (Exception e) {
++                System.out.println(e.getMessage());
++            }
++        }
++    }
++
++    public void push(int entry) throws Exception {
++        if (this.isStackFull()) {
++            System.out.println("stack is full please increse the capacity");
++            this.increaseStackCapacity();
++        }
++        System.out.println("pushing the element : " + entry);
++        this.stackArray[++top] = entry;
++    }
++
++    /**
++     * removing elements from top of the stack
++     *
++     * @return
++     * @throws Exception
++     */
++    public int pop() throws Exception {
++        if (this.isStackEmpty()) {
++            throw new Exception("stack is empty,can't remove element");
++        }
++        int entry = this.stackArray[top--];
++        System.out.println("removing element" + entry);
++        return entry;
++    }
++
++    public int peek() {
++        return stackArray[top];
++    }
++
++    public void increaseStackCapacity() {
++        int[] newStackArray = new int[this.stackSize * 2];
++        for (int i = 0; i < stackSize; i++) {
++            newStackArray[i] = this.stackArray[i];
++        }
++        this.stackArray = newStackArray;
++        this.stackSize = this.stackSize * 2;
++    }
++
++    public boolean isStackEmpty() {
++        return (top == -1);
++    }
++
++    public boolean isStackFull() {
++        return (top == stackSize - 1);
++    }
++}
+Index: src/com/sked/collection/MyListIterator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/collection/MyListIterator.java	(revision )
++++ src/com/sked/collection/MyListIterator.java	(revision )
+@@ -0,0 +1,30 @@
++package com.sked.collection;
++
++import java.util.ArrayList;
++import java.util.List;
++import java.util.ListIterator;
++
++/**
++ * Created by Android on 11/11/2017.
++ */
++public class MyListIterator {
++    public static void main(String[] args) {
++        List<Integer> list=new ArrayList<>();
++        ListIterator li=null;
++        list.add(60);
++        list.add(40);
++        list.add(30);
++        list.add(19);
++        list.add(29);
++        list.add(57);
++        li=list.listIterator();
++        System.out.println("Elements in forward directiton");
++        while (li.hasNext()){
++            System.out.println(li.next());
++        }
++        System.out.println("Elements in backward directiton");
++        while (li.hasPrevious()){
++            System.out.println(li.previous());
++        }
++    }
++}
+Index: src/com/sked/constructor/ParameterizeConstructor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/constructor/ParameterizeConstructor.java	(revision )
++++ src/com/sked/constructor/ParameterizeConstructor.java	(revision )
+@@ -0,0 +1,18 @@
++package com.sked.constructor;
++
++/**
++ * Created by Android on 10/7/2017.
++ */
++public class ParameterizeConstructor {
++    private String userName;
++
++    public ParameterizeConstructor(String name) {
++        this.userName=name;
++        System.out.println("ParameterizeConstructor Invoked");
++        System.out.println("user name is: " + userName);
++    }
++
++    public static void main(String[] args) {
++        ParameterizeConstructor pcObj = new ParameterizeConstructor("Mnaish verma");
++    }
++}
+Index: src/com/sked/basics/FibonacciSeries.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/basics/FibonacciSeries.java	(revision )
++++ src/com/sked/basics/FibonacciSeries.java	(revision )
+@@ -0,0 +1,22 @@
++package com.sked.basics;
++
++/**
++ * Created by Android on 10/5/2017.
++ */
++public class FibonacciSeries {
++    public static void main(String[] args) {
++        printFibonacci(10);
++    }
++
++    private static void printFibonacci(int count) {
++        int[] fibArray = new int[count];
++        fibArray[0] = 0;
++        fibArray[1] = 1;
++        for (int i = 2; i < count; i++) {
++            fibArray[i] = fibArray[i - 1] + fibArray[i - 2];
++        }
++        for (int i=0;i<count;i++){
++            System.out.print(fibArray[i] + ",");
++        }
++    }
++}
+Index: src/com/sked/basics/FloyedTriangle.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/basics/FloyedTriangle.java	(revision )
++++ src/com/sked/basics/FloyedTriangle.java	(revision )
+@@ -0,0 +1,25 @@
++package com.sked.basics;
++
++import java.util.Scanner;
++
++/**
++ * Created by Android on 8/3/2017.
++ */
++public class FloyedTriangle {
++
++
++    public static void main(String[] args) {
++        int i, j, num = 1, range;
++        System.out.println("Enter range of triangle");
++        Scanner scanner = new Scanner(System.in);
++        range = scanner.nextInt();
++        for (i = 1; i <= range; i++) {
++            for (j = 1; j <= i; j++) {
++
++                System.out.print(num +" ");
++                num++;
++            }
++            System.out.println();
++        }
++    }
++}
+Index: src/com/sked/string/Linecount.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/string/Linecount.java	(revision )
++++ src/com/sked/string/Linecount.java	(revision )
+@@ -0,0 +1,14 @@
++package com.sked.string;
++
++/**
++ * Created by Android on 8/22/2017.
++ */
++public class Linecount {
++    public static int getLineCount(String string) {
++        return string.split("[\n|\r]").length;
++    }
++
++    public static void main(String[] args) {
++
++    }
++}
+Index: src/com/sked/string/SplitFunction.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/string/SplitFunction.java	(revision )
++++ src/com/sked/string/SplitFunction.java	(revision )
+@@ -0,0 +1,31 @@
++package com.sked.string;
++
++/**
++ * Created by Android on 11/8/2017.
++ */
++public class SplitFunction {
++
++    public static void main(String[] args) {
++        String str = "This program splits a string based on space";
++        String token[]= str.split(" ");
++        for (String string:token) {
++            System.out.println(string);
++        }
++
++        //str = "This     program  splits a string based on space";
++        token = str.split("\\s+");
++        for (String tokenObj : token) {
++            //System.out.println(singleToken);
++            System.out.println(tokenObj);
++        }
++
++        /**
++         * Getting character array from the existing string
++         */
++
++        char[] ch= new char[7];
++        str.getChars(5,12,ch/*Destination char array*/,0);
++        System.out.println(ch);
++
++    }
++}
+Index: src/com/sked/LinkedList/SinglyLinkedList.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/LinkedList/SinglyLinkedList.java	(revision )
++++ src/com/sked/LinkedList/SinglyLinkedList.java	(revision )
+@@ -0,0 +1,97 @@
++package com.sked.LinkedList;
++
++/**
++ * Created by Android on 8/9/2017.
++ */
++public class SinglyLinkedList<T> {
++    private Node<T> head;
++
++    public void add(T elements) {
++        Node<T> nd = new Node<T>();
++        nd.setValues(elements);
++        System.out.println("adding elements to node:" + elements);
++        Node<T> tmp = head;
++        while (true) {
++            if (tmp == null) {
++                //since there is only one element, both head and
++                //tail points to the same object.
++                head = nd;
++                break;
++            } else if (tmp.getNextValue() == null) {
++                tmp.setNextValue(nd);
++                break;
++            } else {
++                tmp = tmp.getNextValue();
++            }
++        }
++    }
++
++    public void traverse() {
++        Node<T> tmp = head;
++        while (true) {
++            if (tmp == null) {
++                break;
++            }
++            System.out.println(tmp.getValues() + "\t");
++            tmp = tmp.getNextValue();
++        }
++    }
++
++    public void reverseList() {
++        System.out.println("\n Reversing linkedList \n");
++        Node<T> next = null;
++        Node<T> current = head;
++        Node<T> prev = null;
++
++        while (current != null) {
++
++            next = current.getNextValue();
++            current.setNextValue(prev);
++            prev = current;
++            current = next;
++        }
++        head=prev;
++    }
++
++    public static void main(String[] args) {
++        SinglyLinkedList<Integer> mLinkedList = new SinglyLinkedList<>();
++        mLinkedList.add(7);
++        mLinkedList.add(8);
++        mLinkedList.add(9);
++        mLinkedList.add(10);
++
++        mLinkedList.traverse();
++        System.out.println();
++        mLinkedList.reverseList();
++        System.out.println();
++        mLinkedList.traverse();
++    }
++
++    public class Node<T> implements Comparable<T> {
++        private T values;
++        private Node<T> nextValue;
++
++        public T getValues() {
++            return values;
++        }
++
++        public void setValues(T values) {
++            this.values = values;
++        }
++
++        public Node<T> getNextValue() {
++            return nextValue;
++        }
++
++        public void setNextValue(Node<T> nextValue) {
++            this.nextValue = nextValue;
++        }
++
++        @Override
++        public int compareTo(T args) {
++            if (args == this.values)
++                return 0;
++            else return 1;
++        }
++    }
++}
+Index: src/com/sked/collection/MyEnumeration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/collection/MyEnumeration.java	(revision )
++++ src/com/sked/collection/MyEnumeration.java	(revision )
+@@ -0,0 +1,25 @@
++package com.sked.collection;
++
++import java.util.Enumeration;
++import java.util.Vector;
++
++/**
++ * Created by Android on 11/11/2017.
++ */
++public class MyEnumeration {
++    public static void main(String[] args) {
++        Vector<String> compLanguage=new Vector<>();
++        Enumeration<String> enumeration= null;
++        compLanguage.add("java");
++        compLanguage.add("kotlin");
++        compLanguage.add("jsp");
++        compLanguage.add("Servlet");
++        compLanguage.add("EJB");
++        compLanguage.add("php");
++        compLanguage.add("perl");
++        enumeration=compLanguage.elements();
++        while (enumeration.hasMoreElements()){
++            System.out.println(enumeration.nextElement());
++        }
++    }
++}
+Index: src/com/sked/basics/DuplicateElement.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/basics/DuplicateElement.java	(revision )
++++ src/com/sked/basics/DuplicateElement.java	(revision )
+@@ -0,0 +1,35 @@
++package com.sked.basics;
++
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * Created by Android on 8/10/2017.
++ */
++public class DuplicateElement {
++
++    private int findDuplicate(List<Integer> numbers) {
++        int biggestNumber = numbers.size() - 1;
++        int total = findSum(numbers);
++        return total - (biggestNumber * (biggestNumber + 1) / 2);
++
++    }
++
++    private int findSum(List<Integer> numbers) {
++        int sum = 0;
++        for (int number : numbers) {
++            sum += number;
++        }
++        return sum;
++    }
++
++    public static void main(String[] args) {
++        List<Integer> mList = new ArrayList<>();
++        for (int i = 1; i <=30; i++) {
++            mList.add(i);
++        }
++        mList.add(20);
++        DuplicateElement mObj = new DuplicateElement();
++        System.out.println("Duplicate element is: " + mObj.findDuplicate(mList));
++    }
++}
+Index: src/com/sked/adapterdesignpattern/FurnanceController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/adapterdesignpattern/FurnanceController.java	(revision )
++++ src/com/sked/adapterdesignpattern/FurnanceController.java	(revision )
+@@ -0,0 +1,16 @@
++package com.sked.adapterdesignpattern;
++
++/**
++ * Created by Android on 8/12/2017.
++ * FurnanceController class, which controls furnance temperature
++ */
++public class FurnanceController {
++
++    /**
++     * this accept method only in fahrenheit format
++     * @param heatLevel
++     */
++    public void changeFurnaceTemperature(int heatLevel){
++        System.out.println("furnance temperature: "+heatLevel);
++    }
++}
+Index: src/com/sked/string/CharacterAtIndex.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/string/CharacterAtIndex.java	(revision )
++++ src/com/sked/string/CharacterAtIndex.java	(revision )
+@@ -0,0 +1,39 @@
++package com.sked.string;
++
++import java.util.Scanner;
++import java.util.regex.Pattern;
++
++/**
++ * Created by Android on 8/8/2017.
++ */
++public class CharacterAtIndex {
++private static Pattern PATTERN_WHITE_SPACE=Pattern.compile("\\P{javaWhitespace}+");
++    public static void main(String[] args) {
++
++        System.out.println("Enter the string");
++       Scanner scString=new Scanner(System.in);
++
++        String inputString=scString.next();
++        System.out.println("Enter the index to get the character value");
++        Scanner sc=new Scanner(System.in);
++        int index=sc.nextInt();
++
++        //get the character at given index
++        int c=inputString.charAt(index);
++        System.out.println("character at index: "+(char)c);
++
++
++        /*String str = "Java Exercises!";
++        System.out.println("Original String = " + str);
++        // Get the character at positions 0 and 10.
++        int index1 = str.charAt(0);
++        int index2 = str.charAt(10);
++
++        // Print out the results.
++        System.out.println("The character at position 0 is " +
++                (char)index1);
++        System.out.println("The character at position 10 is " +
++                (char)index2);*/
++
++    }
++}
+Index: src/com/sked/generics/GenericInheritance.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/generics/GenericInheritance.java	(revision )
++++ src/com/sked/generics/GenericInheritance.java	(revision )
+@@ -0,0 +1,25 @@
++package com.sked.generics;
++
++/**
++ * Created by Android on 6/12/2017.
++ */
++public class GenericInheritance {
++    /**
++     * We know that Java inheritance allows us to assign a variable A to another variable B if A is subclass of B.
++     * So we might think that any generic type of A can be assigned to generic type of B,
++     * but it’s not the case.
++     **/
++    public static void main(String[] args) {
++        String str = "abc";
++        Object obj = new Object();
++
++        obj = str;//works because string is a object,inheritance in java
++        MyClass<String> myClass1 = new MyClass<>();
++        MyClass<Object> myClass2=new MyClass<>();
++
++        obj=myClass1;//MyClass<T> ia parent object
++
++    }
++
++    public static class MyClass<T> {}
++}
+Index: src/com/sked/algorithm/RSAalgo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/algorithm/RSAalgo.java	(revision )
++++ src/com/sked/algorithm/RSAalgo.java	(revision )
+@@ -0,0 +1,89 @@
++package com.sked.algorithm;
++
++import java.io.DataInputStream;
++import java.io.IOException;
++import java.math.BigInteger;
++import java.util.Random;
++
++/**
++ * Created by Android on 11/7/2017.
++ */
++public class RSAalgo {
++
++    private BigInteger p, q, N, phi, d, e;
++    private int bitLength = 1024;
++    private int bitSize = 256;
++
++    // block size in byte
++
++    private Random random;
++
++
++    public RSAalgo() {
++        random = new Random();
++
++        p = BigInteger.probablePrime(bitLength, random);
++        q = BigInteger.probablePrime(bitLength, random);
++
++        N = p.multiply(q);
++        phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
++        e = BigInteger.probablePrime(bitLength / 2, random);
++
++        while (phi.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(phi) < 0) {
++            e.add(BigInteger.ONE);
++        }
++
++        d = e.modInverse(phi);
++    }
++
++    public RSAalgo(BigInteger e, BigInteger d, BigInteger n) {
++        this.e = e;
++        this.d = d;
++        this.N = n;
++    }
++
++    public static String byteToString(byte[] encrypted) {
++        String test = "";
++        for (byte b: encrypted){
++            test += Byte.toString(b);
++        }
++        return test;
++    }
++
++    /**
++     *  Encrypt message
++     */
++
++    public byte[] encrypt(byte[] message){
++        return (new BigInteger(message)).modPow(e,N).toByteArray();
++    }
++
++    /**
++     *  Decrypt message
++     */
++
++    public byte[] decrypt(byte[] message){
++        return (new BigInteger(message)).modPow(d,N).toByteArray();
++    }
++
++    public static void main(String[] args) throws IOException {
++        RSAalgo rsa=new RSAalgo();
++        DataInputStream dip=new DataInputStream(System.in);
++        String testString;
++        System.out.println("Enter plain text");
++        testString = dip.readLine();
++        System.out.println("Encrypting String : "+testString);
++        System.out.println("String in byte: "+byteToString(testString.getBytes()));
++
++        // encrypt
++        byte[] encrypted = rsa.encrypt(testString.getBytes());
++
++        System.out.println("encrpted string in byte: "+byteToString(encrypted));
++
++        //decrypt
++
++        byte[] decryptrd = rsa.decrypt(encrypted);
++        System.out.println("decrpted string in byte: "+byteToString(decryptrd));
++        System.out.println("Decrypted String "+new String(decryptrd));
++    }
++}
+Index: src/com/sked/string/Concatenation.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/string/Concatenation.java	(revision )
++++ src/com/sked/string/Concatenation.java	(revision )
+@@ -0,0 +1,18 @@
++package com.sked.string;
++
++/**
++ * Created by Android on 11/7/2017.
++ */
++public class Concatenation {
++    public static void main(String[] args) {
++        String first = "i am ";
++        String second = "Human";
++
++
++        String d = first + second;
++        System.out.println(d);
++
++        d = first.concat(second);
++        System.out.println(d);
++    }
++}
+Index: src/com/sked/string/StringCompare.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/string/StringCompare.java	(revision )
++++ src/com/sked/string/StringCompare.java	(revision )
+@@ -0,0 +1,29 @@
++package com.sked.string;
++
++/**
++ * Created by Android on 11/7/2017.
++ */
++public class StringCompare {
++    public static void main(String[] args) {
++        String first = "Word";
++        String second= "word";
++
++        /**
++         * we cant we "==" operator to compare two string,
++         * we have to use equals() methods
++         */
++
++        if(first.equals(second)){
++            System.out.println("both strings are equals");
++        }else {
++            System.out.println("both strings are not equals");
++        }
++
++        //we can ignore case using method equalsIgnoreCase()
++        if(first.equalsIgnoreCase(second)){
++            System.out.println("both strings are equal");
++        }else {
++            System.out.println("both strings are not equals");
++        }
++    }
++}
+Index: src/com/sked/adapterdesignpattern/FurnanceRegulatorySystem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/adapterdesignpattern/FurnanceRegulatorySystem.java	(revision )
++++ src/com/sked/adapterdesignpattern/FurnanceRegulatorySystem.java	(revision )
+@@ -0,0 +1,14 @@
++package com.sked.adapterdesignpattern;
++
++/**
++ * Created by Android on 8/12/2017.
++ * Regulatory system that receive temperature in centigrade but furnance controller accepts
++ * only fahrenheit format.
++ */
++public class FurnanceRegulatorySystem {
++
++    public void regulateFurnanceTemperature(){
++        FurnanceControllerAdapter furnanceControllerAdapter=new FurnanceControllerAdapter();
++        furnanceControllerAdapter.changeFurnaceTemperature(300);
++    }
++}
+Index: src/com/sked/constructor/DefaultConstructor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/sked/constructor/DefaultConstructor.java	(revision )
++++ src/com/sked/constructor/DefaultConstructor.java	(revision )
+@@ -0,0 +1,16 @@
++package com.sked.constructor;
++
++/**
++ * Created by Android on 10/7/2017.
++ */
++public class DefaultConstructor {
++
++    public DefaultConstructor() {
++        System.out.println("Default constructor invoked");
++    }
++
++    public static void main(String[] args) {
++        DefaultConstructor obj=new DefaultConstructor();
++    }
++
++}
