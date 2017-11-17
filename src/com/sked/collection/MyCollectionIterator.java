@@ -1,6 +1,7 @@
 package com.sked.collection;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,18 +10,29 @@ import java.util.List;
  */
 public class MyCollectionIterator {
     public static void main(String[] args) {
-        String removeElem="C++";
+        int i = 0;
 
-        List<String> myList=new ArrayList<>();
+        String removeElem = "C++";
+
+        List<String> myList = new ArrayList<>();
         myList.add("Java");
         myList.add("Unix");
         myList.add("Oracle");
         myList.add("C++");
         myList.add("Perl");
-        System.out.println("Before remove:"+myList);
+        System.out.println("Before remove:" + myList);
         System.out.println();
         myList.removeIf(removeElem::equals);
-        System.out.println("After remove:"+myList);
+        System.out.println("After remove:" + myList);
+        int[] array = {23, 22, 23, 44, 28};
+        List<int[]> al=Arrays.asList(array);
+        System.out.println("size of list is"+al.size());
+
+        Iterator<int[]> arry = Arrays.asList(array).iterator();
+        while (arry.hasNext()) {
+            i++;
+        }
+        System.out.println("length of array is: " + i);
 
     }
 }
