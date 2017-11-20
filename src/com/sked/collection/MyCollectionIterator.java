@@ -24,7 +24,7 @@ public class MyCollectionIterator {
         System.out.println();
         myList.removeIf(removeElem::equals);
         System.out.println("After remove:" + myList);
-        int[] array = {23, 22, 23, 44, 28};
+        /*int[] array = {23, 22, 23, 44, 28};
         List<int[]> al=Arrays.asList(array);
         System.out.println("size of list is"+al.size());
 
@@ -32,7 +32,7 @@ public class MyCollectionIterator {
         while (arry.hasNext()) {
             i++;
         }
-        System.out.println("length of array is: " + i);
+        System.out.println("length of array is: " + i);*/
 
     }
 }
