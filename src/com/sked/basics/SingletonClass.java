@@ -6,20 +6,22 @@ package com.sked.basics;
 public class SingletonClass {
     private static SingletonClass mObj;
 
-    static {
-        mObj = new SingletonClass();
+    private SingletonClass() {
     }
 
-    private static SingletonClass getInstance() {
+    public static SingletonClass getInstance() {
+        if (mObj == null) {
+            mObj = new SingletonClass();
+        }
         return mObj;
+    }
+
+    public static void main(String[] args) {
+        SingletonClass mObject = getInstance();
+        mObject.testMe();
     }
 
     private void testMe() {
         System.out.println("hey its working");
-    }
-
-    public static void main(String[] args) {
-        SingletonClass mObject=getInstance();
-        mObject.testMe();
     }
 }

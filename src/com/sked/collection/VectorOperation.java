@@ -12,6 +12,7 @@ public class VectorOperation {
         vct.add("first");
         vct.add("second");
         vct.add("third");
+        vct.add(null);
         System.out.println(vct);
         //adding element to specified position
         vct.add(2,"random");
